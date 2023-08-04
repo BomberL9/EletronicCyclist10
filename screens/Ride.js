@@ -362,7 +362,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     fontFamily: "Rajdhani_600SemiBold",
-    color: "#4C5D70"
+    color: "#4C5D70",
+    marginBottom: 20
   },
   lowerContainer: {
     flex: 0.5,
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   scanbuttonText: {
-    fontSize: 24,
+    fontSize: 23,
     color: "#4C5D70",
     fontFamily: "Rajdhani_600SemiBold"
   },
