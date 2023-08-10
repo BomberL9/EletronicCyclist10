@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 export default class BottomTabNavigator extends Component {
   render() {
     return (
-      <NavigationContainer>
+      <NavigationContainer independent={true}>
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -30,7 +30,6 @@ export default class BottomTabNavigator extends Component {
                   name={iconName}
                   size={size}
                   color={color}
-                  size={size}
                 />
               );
             }
