@@ -29,7 +29,8 @@ export default class RideScreen extends Component {
       hasCameraPermissions: null,
       scanned: false,
       bikeType: "",
-      userName: ""
+      userName: "",
+      email: firebase.auth().currentUser.email
     };
   }
 
@@ -110,10 +111,11 @@ export default class RideScreen extends Component {
     }
   };
 
-  getBikeDetails = bikeId => {
+  getBikeDetails = (bikeId, email) => {
     bikeId = bikeId.trim();
     db.collection("bicycles")
       .where("id", "==", bikeId)
+      .where("email_id","==", email)
       .get()
       .then(snapshot => {
         snapshot.docs.map(doc => {
@@ -124,9 +126,10 @@ export default class RideScreen extends Component {
       });
   };
 
-  getUserDetails = userId => {
+  getUserDetails = (userId, email) => {
     db.collection("users")
       .where("id", "==", userId)
+      .where("email_id","==", email)
       .get()
       .then(snapshot => {
         snapshot.docs.map(doc => {
@@ -139,10 +142,11 @@ export default class RideScreen extends Component {
       });
   };
 
-  checkBikeAvailability = async bikeId => {
+  checkBikeAvailability = async (bikeId, email) => {
     const bikeRef = await db
       .collection("bicycles")
       .where("id", "==", bikeId)
+      .where("email_id","==", email)
       .get();
 
     var transactionType = "";
@@ -164,10 +168,11 @@ export default class RideScreen extends Component {
     return transactionType;
   };
 
-  checkUserEligibilityForStartRide = async userId => {
+  checkUserEligibilityForStartRide = async (userId, email) => {
     const userRef = await db
       .collection("users")
       .where("id", "==", userId)
+      .where("email_id","==", email)
       .get();
 
     var isUserEligible = false;
@@ -194,10 +199,11 @@ export default class RideScreen extends Component {
     return isUserEligible;
   };
 
-  checkUserEligibilityForEndRide = async (bikeId, userId) => {
+  checkUserEligibilityForEndRide = async (bikeId, userId, email) => {
     const transactionRef = await db
       .collection("transactions")
       .where("bike_id", "==", bikeId)
+      .where("email_id","==", email)
       .limit(1)
       .get();
     var isUserEligible = "";
